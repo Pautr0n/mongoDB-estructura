@@ -14,11 +14,14 @@ db.createCollection("users", {
         "username": {
           "bsonType": "string"
         },
+        "channel_id": {
+          "bsonType": "objectId"
+        },
         "birth_Date": {
           "bsonType": "date"
         },
         "gender": {
-          "enum": ["M", "F", "N/A"]
+          "enum": ["M","F","N/A"]
         },
         "postal_code": {
           "bsonType": "string"
@@ -31,15 +34,9 @@ db.createCollection("users", {
           "items": {
             "bsonType": "objectId"
           }
-        },
-        "playlists": {
-          "bsonType": "array",
-          "items": {
-            "bsonType": "objectId"
-          }
         }
-      }
-    }
+      }  
+    } 
   }
 });
 db.createCollection("videos", {
@@ -80,13 +77,13 @@ db.createCollection("videos", {
                 "bsonType": "date"
               },
               "reaction": {
-                "enum": ["Like", "Dislike"]
+                "enum": ["Like","Dislike"]
               }
             }
-          }
+          }  
         },
         "state": {
-          "enum": ["Public", "Private", "Hidden"]
+          "enum": ["Public","Private","Hidden"]
         },
         "tags": {
           "bsonType": "array",
@@ -95,19 +92,17 @@ db.createCollection("videos", {
           }
         },
         "published": {
-          "bsonType": "array",
-          "items": {
-            "title": "object",
-            "required": ["user_id", "date"],
-            "properties": {
-              "user_id": {
-                "bsonType": "objectId"
-              },
-              "date": {
-                "bsonType": "date"
-              }
+          "bsonType": "object",
+          "title": "object",
+          "required": ["user_id", "date"],
+          "properties": {
+            "user_id": {
+              "bsonType": "objectId"
+            },
+            "date": {
+              "bsonType": "date"
             }
-          }
+          }  
         },
         "comments": {
           "bsonType": "array",
@@ -115,8 +110,8 @@ db.createCollection("videos", {
             "bsonType": "objectId"
           }
         }
-      }
-    }
+      }  
+    } 
   }
 });
 db.createCollection("channel", {
@@ -124,7 +119,7 @@ db.createCollection("channel", {
     $jsonSchema: {
       "bsonType": "object",
       "title": "channel",
-      "required": ["name", "created_on", "created_by"],
+      "required": ["name", "created_on"],
       "properties": {
         "name": {
           "bsonType": "string"
@@ -135,17 +130,15 @@ db.createCollection("channel", {
         "created_on": {
           "bsonType": "date"
         },
-        "created_by": {
-          "bsonType": "objectId"
-        },
-        "subscribers": {
+        "users_id": {
           "bsonType": "array",
           "items": {
-            "bsonType": "objectId"
+            "bsonType": "objectId"  ,
+            "description":"users subscribed to the channel"
           }
         }
-      }
-    }
+      }  
+    } 
   }
 });
 db.createCollection("playlists", {
@@ -153,7 +146,7 @@ db.createCollection("playlists", {
     $jsonSchema: {
       "bsonType": "object",
       "title": "playlists",
-      "required": ["name", "created_on", "state", "created_by"],
+      "required": ["name", "created_on", "state", "user_id", "videos_id", "users_id"],
       "properties": {
         "name": {
           "bsonType": "string"
@@ -162,19 +155,25 @@ db.createCollection("playlists", {
           "bsonType": "date"
         },
         "state": {
-          "enum": ["Public", "Private"]
+          "enum": ["Public","Private"]
         },
-        "created_by": {
+        "user_id": {
           "bsonType": "objectId"
         },
-        "videos": {
+        "videos_id": {
+          "bsonType": "array",
+          "items": {
+            "bsonType": "objectId"
+          }
+        },
+        "users_id": {
           "bsonType": "array",
           "items": {
             "bsonType": "objectId"
           }
         }
-      }
-    }
+      }  
+    } 
   }
 });
 db.createCollection("comments", {
@@ -182,7 +181,7 @@ db.createCollection("comments", {
     $jsonSchema: {
       "bsonType": "object",
       "title": "comments",
-      "required": ["comment", "date", "commented_by", "video_id"],
+      "required": ["comment", "date", "user_id", "video_id"],
       "properties": {
         "comment": {
           "bsonType": "string"
@@ -190,13 +189,13 @@ db.createCollection("comments", {
         "date": {
           "bsonType": "date"
         },
-        "commented_by": {
+        "user_id": {
           "bsonType": "objectId"
         },
         "video_id": {
           "bsonType": "objectId"
         }
-      }
-    }
+      }  
+    } 
   }
 });

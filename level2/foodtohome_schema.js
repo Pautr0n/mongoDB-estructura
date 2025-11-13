@@ -3,7 +3,7 @@ db.createCollection("customers", {
     $jsonSchema: {
       "bsonType": "object",
       "title": "customers",
-      "required": ["name", "surname", "address"],
+      "required": ["name", "surname", "address", "phone_number"],
       "properties": {
         "name": {
           "bsonType": "string"
@@ -37,13 +37,13 @@ db.createCollection("customers", {
             "province": {
               "bsonType": "string"
             }
-          }
+          }  
         },
         "phone_number": {
           "bsonType": "string"
         }
-      }
-    }
+      }  
+    } 
   }
 });
 db.createCollection("sales_order", {
@@ -72,7 +72,7 @@ db.createCollection("sales_order", {
                 "bsonType": "int"
               }
             }
-          }
+          }  
         },
         "total_amount": {
           "bsonType": "decimal"
@@ -91,7 +91,7 @@ db.createCollection("sales_order", {
             "delivered_on": {
               "bsonType": "date"
             }
-          }
+          }  
         },
         "customer_id": {
           "bsonType": "objectId"
@@ -99,8 +99,8 @@ db.createCollection("sales_order", {
         "restaurant_id": {
           "bsonType": "objectId"
         }
-      }
-    }
+      }  
+    } 
   }
 });
 db.createCollection("products", {
@@ -125,8 +125,8 @@ db.createCollection("products", {
         "pizza_category": {
           "bsonType": "string"
         }
-      }
-    }
+      }  
+    } 
   }
 });
 db.createCollection("restaurant", {
@@ -151,8 +151,8 @@ db.createCollection("restaurant", {
         "province": {
           "bsonType": "string"
         }
-      }
-    }
+      }  
+    } 
   }
 });
 db.createCollection("employees", {
@@ -175,12 +175,12 @@ db.createCollection("employees", {
           "bsonType": "string"
         },
         "job_position": {
-          "enum": ["Deliveries", "Kitchen"]
+          "enum": ["Deliveries","Kitchen"]
         },
         "restaurant_id": {
           "bsonType": "objectId"
         }
-      }
-    }
+      }  
+    } 
   }
 });

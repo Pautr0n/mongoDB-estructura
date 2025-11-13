@@ -3,45 +3,13 @@ db.createCollection("eyeglasses", {
     $jsonSchema: {
       "bsonType": "object",
       "title": "eyeglasses",
-      "required": ["brand", "graduation", "frame_type", "frame_color", "glasses_color", "price", "supplier"],
+      "required": ["brand", "frame_type", "supplier", "price"],
       "properties": {
         "brand": {
           "bsonType": "string"
         },
-        "graduation": {
-          "bsonType": "object",
-          "title": "object",
-          "required": ["left_glass", "right_glass"],
-          "properties": {
-            "left_glass": {
-              "bsonType": "decimal"
-            },
-            "right_glass": {
-              "bsonType": "decimal"
-            }
-          }  
-        },
         "frame_type": {
           "enum": ["Metalic","Plastic","Rimless"]
-        },
-        "frame_color": {
-          "bsonType": "string"
-        },
-        "glasses_color": {
-          "bsonType": "object",
-          "title": "object",
-          "required": ["left_glass", "right_glass"],
-          "properties": {
-            "left_glass": {
-              "bsonType": "string"
-            },
-            "right_glass": {
-              "bsonType": "string"
-            }
-          }  
-        },
-        "price": {
-          "bsonType": "decimal"
         },
         "supplier": {
           "bsonType": "object",
@@ -90,11 +58,14 @@ db.createCollection("eyeglasses", {
             }
           }  
         },
+        "price": {
+          "bsonType": "decimal"
+        },
         "bought_by": {
           "bsonType": "array",
           "items": {
             "title": "object",
-            "required": ["customer", "sales_date", "sold_by"],
+            "required": ["customer"],
             "properties": {
               "customer": {
                 "bsonType": "object",
@@ -102,17 +73,7 @@ db.createCollection("eyeglasses", {
                 "required": ["name", "address", "phone_number", "email", "registration_date"],
                 "properties": {
                   "recomended_by": {
-                    "bsonType": "object",
-                    "title": "object",
-                    "required": ["customer_id", "name"],
-                    "properties": {
-                      "customer_id": {
-                        "bsonType": "objectId"
-                      },
-                      "name": {
-                        "bsonType": "string"
-                      }
-                    }  
+                    "bsonType": "string"
                   },
                   "name": {
                     "bsonType": "string"
@@ -153,22 +114,6 @@ db.createCollection("eyeglasses", {
                   },
                   "registration_date": {
                     "bsonType": "date"
-                  }
-                }  
-              },
-              "sales_date": {
-                "bsonType": "date"
-              },
-              "sold_by": {
-                "bsonType": "object",
-                "title": "object",
-                "required": ["name", "surname"],
-                "properties": {
-                  "name": {
-                    "bsonType": "string"
-                  },
-                  "surname": {
-                    "bsonType": "string"
                   }
                 }  
               }
